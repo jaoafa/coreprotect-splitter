@@ -226,7 +226,7 @@ async function main() {
             continue
           }
 
-          const month = Math.floor((date.getMonth() - 1) / 3) * 3 + 1
+          const month = Math.floor(date.getMonth() / 3) * 3 + 1
           newTableName = `${date.getFullYear()}${String(month).padStart(
             2,
             '0'
