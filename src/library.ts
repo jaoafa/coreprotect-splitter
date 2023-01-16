@@ -3,8 +3,12 @@ import { CPBlockLogResult } from './model/co-block'
 import { CPMaterialResult } from './model/co-material-map'
 import { CPUserResult } from './model/co-user'
 
-export async function getUsers(database: mysql.Connection): Promise<CPUserResult> {
-  const [rows] = (await database.query('SELECT * FROM co_user')) as RowDataPacket[][]
+export async function getUsers(
+  database: mysql.Connection
+): Promise<CPUserResult> {
+  const [rows] = (await database.query(
+    'SELECT * FROM co_user'
+  )) as RowDataPacket[][]
   return rows as CPUserResult
 }
 
@@ -29,7 +33,9 @@ export async function getBlockLogs(
   return rows as CPBlockLogResult
 }
 
-export async function getBlockLogCount(database: mysql.Connection): Promise<number> {
+export async function getBlockLogCount(
+  database: mysql.Connection
+): Promise<number> {
   // 最後のrowidを取得
   const [rows] = (await database.query(
     'SELECT MAX(rowid) AS max FROM co_block'
