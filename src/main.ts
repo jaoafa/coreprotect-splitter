@@ -161,6 +161,7 @@ async function main() {
           const hours = Math.floor(minutes / 60)
           return `${hours}h ${minutes % 60}m ${seconds % 60}s`
         },
+        etaBuffer: 100,
       },
       cliProgress.Presets.shades_classic
     )
