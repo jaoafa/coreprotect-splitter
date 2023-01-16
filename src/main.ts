@@ -154,7 +154,7 @@ async function main() {
         clearOnComplete: false,
         hideCursor: true,
         format:
-          '{bar} {percentage}% | ETA: {eta_formatted} | {value}/{total} ({datetime})',
+          '[{page}] {bar} {percentage}% | ETA: {eta_formatted} | {value}/{total} ({datetime})',
         formatTime: (time) => {
           const seconds = Math.floor(time / 1000)
           const minutes = Math.floor(seconds / 60)
@@ -226,7 +226,7 @@ async function main() {
             continue
           }
 
-          const month = Math.floor((date.getMonth() - 1) / 3) * 3 + 1
+          const month = Math.floor(date.getMonth() / 3) * 3 + 1
           newTableName = `${date.getFullYear()}${String(month).padStart(
             2,
             '0'
@@ -255,6 +255,7 @@ async function main() {
         } finally {
           mainBar.update(Number.parseInt(rowid, 10), {
             datetime,
+            page,
           })
         }
       }
