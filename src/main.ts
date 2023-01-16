@@ -60,8 +60,8 @@ function formatDateTime(date: Date) {
   ].join('')
 }
 
-function getCreateSql(databaseName: string, tableName: string) {
-  return `CREATE TABLE IF NOT EXISTS \`${databaseName}.${tableName}\` (
+function getCreateSql(tableName: string) {
+  return `CREATE TABLE IF NOT EXISTS ${tableName} (
       \`rowid\` INT NOT NULL AUTO_INCREMENT,
       \`time\` INT(10) NOT NULL,
       \`username\` VARCHAR(16) NOT NULL,
@@ -82,7 +82,6 @@ function getCreateSql(databaseName: string, tableName: string) {
 }
 
 function getInsertSql(
-  databaseName: string,
   tableName: string,
   log: {
     time: number
@@ -97,7 +96,7 @@ function getInsertSql(
     rolledBack: boolean
   }
 ) {
-  return `INSERT INTO \`${databaseName}.${tableName}\` (
+  return `INSERT INTO ${tableName} (
     \`time\`,
     \`username\`,
     \`uuid\`,
@@ -231,13 +230,13 @@ async function main() {
             2,
             '0'
           )}`
-          const createSql = getCreateSql('CoreProtect_MainOLD', newTableName)
+          const createSql = getCreateSql(newTableName)
           if (!creates.includes(newTableName)) {
             creates.push(newTableName)
             createSqls.push(createSql)
           }
 
-          const insertSql = getInsertSql('CoreProtect_MainOLD', newTableName, {
+          const insertSql = getInsertSql(newTableName, {
             time,
             username,
             uuid,
