@@ -119,7 +119,7 @@ function getInsertSql(
     '${log.data}',
     '${log.action}',
     '${log.rolledBack}'
-  )`
+  );`
 }
 
 async function main() {
