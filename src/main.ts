@@ -61,7 +61,7 @@ function formatDateTime(date: Date) {
 }
 
 function getCreateSql(tableName: string) {
-  return `CREATE TABLE IF NOT EXISTS ${tableName} (
+  return `CREATE TABLE IF NOT EXISTS \`${tableName}\` (
       \`rowid\` INT NOT NULL AUTO_INCREMENT,
       \`time\` INT(10) NOT NULL,
       \`username\` VARCHAR(16) NOT NULL,
@@ -96,7 +96,7 @@ function getInsertSql(
     rolledBack: boolean
   }
 ) {
-  return `INSERT INTO ${tableName} (
+  return `INSERT INTO \`${tableName}\` (
     \`time\`,
     \`username\`,
     \`uuid\`,
