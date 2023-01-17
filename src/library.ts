@@ -26,8 +26,9 @@ export async function getBlockLogs(
   startId: number,
   endId: number
 ): Promise<CPBlockLogResult> {
+  const tableName = process.env.BLOCK_TABLE_NAME || 'co_block'
   const [rows] = (await database.query(
-    'SELECT * FROM co_block WHERE rowid BETWEEN ? AND ?',
+    `SELECT * FROM ${tableName} WHERE rowid BETWEEN ? AND ?`,
     [startId, endId]
   )) as RowDataPacket[][]
   return rows as CPBlockLogResult
@@ -36,9 +37,10 @@ export async function getBlockLogs(
 export async function getBlockLogCount(
   database: mysql.Connection
 ): Promise<number> {
+  const tableName = process.env.BLOCK_TABLE_NAME || 'co_block'
   // 最後のrowidを取得
   const [rows] = (await database.query(
-    'SELECT MAX(rowid) AS max FROM co_block'
+    `SELECT MAX(rowid) AS max FROM ${tableName}`
   )) as RowDataPacket[][]
   return rows[0].max as number
 }
